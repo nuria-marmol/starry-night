@@ -1,5 +1,19 @@
 const nightSky = document.querySelector("#sky");
 const template = document.querySelector("#init-stars").content.firstElementChild;
+const button = document.querySelector("#button");
+
+function showMessage() {   
+    const message = document.createElement("p");
+    message.textContent = "Create more stars by clicking anywhere!";
+    message.classList.add("message");
+    document.body.appendChild(message);
+    setTimeout(function() {
+        message.classList.add("message--show");
+    }, 1000)
+    setTimeout(function() {
+        message.classList.remove("message--show");
+    }, 6000)
+}
 
 /**
  * Random size for initial and future stars
@@ -17,9 +31,9 @@ function getStarSize() {
  * 
  * @returns {number}
  */
-function randomXCoord() {
-    // Number from 150 to 990, both included
-    return Math.floor(Math.random() * (990 - 150 + 1) ) + 150;
+function randomXCoord(max) {
+    // Number from 25 to a max, both included
+    return Math.floor(Math.random() * (max - 25 + 1) ) + 25;
 }
 
 /**
@@ -27,9 +41,9 @@ function randomXCoord() {
  * 
  * @returns {number}
  */
-function randomYCoord() {
-    // Number from 100 to 490, both included
-    return Math.floor(Math.random() * (490 - 100 + 1) ) + 100;
+function randomYCoord(max) {
+    // Number from 50 to a max, both included
+    return Math.floor(Math.random() * (max - 62 + 1) ) + 62;
 }
 
 /**
@@ -48,16 +62,22 @@ function addingClassAndSize(aDiv) {
 /**
  * Creating several stars for a start
  */
-function defaultStars() {        
-    const initialStars = Array(24).fill("");
+function defaultStars() {
+    /* We want the stars pattern to adapt to different screen sizes.
+    Minus a number (same min we used for getting random coords) for not making an overflow of stars */
+    const screenWidth = window.innerWidth - 25;
+    const screenHeight = window.innerHeight - 62;
+    const initialStars = Array(26).fill("");
     initialStars.forEach(function(element) {
+        // The div
         const templateCopy = template.cloneNode(true);
-        // Call to previous function
+        // Call to previous functions
         addingClassAndSize(templateCopy);
-        templateCopy.style.left = `${randomXCoord()}px`;
-        templateCopy.style.top = `${randomYCoord()}px`;
+        templateCopy.style.left = `${randomXCoord(screenWidth)}px`;
+        templateCopy.style.top = `${randomYCoord(screenHeight)}px`;
         nightSky.appendChild(templateCopy);
     })    
+    console.log(window.innerWidth - 20);
 }
 
 /**
@@ -71,10 +91,19 @@ function createNewStar(event) {
     newStar.style.left = `${event.clientX}px`; // Where the user clicks
     newStar.style.top = `${event.clientY}px`;    
     nightSky.appendChild(newStar);
+    console.log(event.clientY);
 }
 
-// Event
+function changeConstellations() {    
+    // We clean all previous stars
+    nightSky.textContent = "";
+    defaultStars();    
+}
+
+// Events
 document.addEventListener("click", createNewStar);
+button.addEventListener("click", changeConstellations);
 
 // Init
 defaultStars();
+showMessage();

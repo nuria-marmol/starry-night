@@ -1,15 +1,61 @@
+:root {
+    --colour-white: #ffffff;
+    --color-black: #000000;
+}
+
 body {
+    font-family: Arial;
+    font-size: 1.25rem;
     margin: unset;
 }
 
 .sky {
     height: 100vh;
-    background-color: black;
+    background-color: var(--color-black);
 }
 
-/* For future stars */
+.button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: .75rem 1rem;
+    background-color: transparent;
+    color: var(--colour-white);
+    border: 1px solid var(--colour-white);
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Add to future stars */
 .star {
     position: absolute;    
-    background-color: white;
+    background-color: var(--colour-white);
     border-radius: 50%;
+}
+
+/* Add to future message */
+.message {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: unset;
+    color: var(--colour-white);
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* For a transition effect */
+.message--show {
+    opacity: 1;
+}
+
+@media screen and (max-width: 480px) {
+
+    .button {
+        right: unset;
+        left: 50%;
+        transform: translateX(-50%);        
+    }
 }
