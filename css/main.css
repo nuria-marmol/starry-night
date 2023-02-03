@@ -1,0 +1,15 @@
+body {
+    margin: unset;
+}
+
+.sky {
+    height: 100vh;
+    background-color: black;
+}
+
+/* For future stars */
+.star {
+    position: absolute;    
+    background-color: white;
+    border-radius: 50%;
+}
