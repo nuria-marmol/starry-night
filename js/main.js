@@ -2,17 +2,20 @@ const nightSky = document.querySelector("#sky");
 const template = document.querySelector("#init-stars").content.firstElementChild;
 const button = document.querySelector("#button");
 
-function showMessage() {   
+/**
+ * Showing message with a delay, then hiding it seconds later
+ */
+function showMessage() {
     const message = document.createElement("p");
     message.textContent = "Create more stars by clicking anywhere!";
     message.classList.add("message");
-    document.body.appendChild(message);
+    document.body.appendChild(message);    
     setTimeout(function() {
         message.classList.add("message--show");
     }, 1000)
     setTimeout(function() {
         message.classList.remove("message--show");
-    }, 6000)
+    }, 7000)
 }
 
 /**
@@ -29,20 +32,22 @@ function getStarSize() {
 /**
  * Random X coordinate for initial stars
  * 
+ * @param {number} max Highest X coordinate
  * @returns {number}
  */
 function randomXCoord(max) {
-    // Number from 25 to a max, both included
+    // Number from 25 to a max (we want it to adapt to screen size), both included
     return Math.floor(Math.random() * (max - 25 + 1) ) + 25;
 }
 
 /**
  * Random Y coordinate for initial stars
  * 
+ * @param {number} max Highest Y coordinate
  * @returns {number}
  */
 function randomYCoord(max) {
-    // Number from 50 to a max, both included
+    // Number from 50 to a max (we want it to adapt to screen size), both included
     return Math.floor(Math.random() * (max - 62 + 1) ) + 62;
 }
 
@@ -54,7 +59,8 @@ function randomYCoord(max) {
 function addingClassAndSize(aDiv) {
     // We need the same size for width and height, so we save it here
     const size = getStarSize();
-    aDiv.classList.add("star");
+    aDiv.classList.add("star");    
+    aDiv.classList.add("star--blink");
     aDiv.style.width = `.${size}rem`;
     aDiv.style.height = `.${size}rem`;
 }
@@ -77,7 +83,6 @@ function defaultStars() {
         templateCopy.style.top = `${randomYCoord(screenHeight)}px`;
         nightSky.appendChild(templateCopy);
     })    
-    console.log(window.innerWidth - 20);
 }
 
 /**
@@ -94,8 +99,10 @@ function createNewStar(event) {
     console.log(event.clientY);
 }
 
-function changeConstellations() {    
-    // We clean all previous stars
+/**
+ * Cleaning all previous stars and then generating new ones
+ */
+function changeConstellations() {        
     nightSky.textContent = "";
     defaultStars();    
 }
