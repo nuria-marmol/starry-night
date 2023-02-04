@@ -47,7 +47,7 @@ function randomXCoord(max) {
  * @returns {number}
  */
 function randomYCoord(max) {
-    // Number from 50 to a max (we want it to adapt to screen size), both included
+    // Number from 62 to a max (we want it to adapt to screen size), both included
     return Math.floor(Math.random() * (max - 62 + 1) ) + 62;
 }
 
@@ -60,7 +60,6 @@ function addingClassAndSize(aDiv) {
     // We need the same size for width and height, so we save it here
     const size = getStarSize();
     aDiv.classList.add("star");    
-    aDiv.classList.add("star--blink");
     aDiv.style.width = `.${size}rem`;
     aDiv.style.height = `.${size}rem`;
 }
@@ -73,12 +72,22 @@ function defaultStars() {
     Minus a number (same min we used for getting random coords) for not making an overflow of stars */
     const screenWidth = window.innerWidth - 25;
     const screenHeight = window.innerHeight - 62;
-    const initialStars = Array(26).fill("");
-    initialStars.forEach(function(element) {
+    const initialStars = Array(30).fill("");
+    initialStars.forEach(function(element, index) {
         // The div
         const templateCopy = template.cloneNode(true);
-        // Call to previous functions
+        // Call to previous function
         addingClassAndSize(templateCopy);
+        // Adding animation. We don't want all stars blinking at the same time
+        if (index % 2 === 1) { // odd elements
+            templateCopy.classList.add("star--blink");
+        }
+        setTimeout(() => {
+            // Adding animation to even elements a bit later
+            if (!(index % 2 === 1)) {
+                templateCopy.classList.add("star--blink");
+            }           
+        }, 2000);
         templateCopy.style.left = `${randomXCoord(screenWidth)}px`;
         templateCopy.style.top = `${randomYCoord(screenHeight)}px`;
         nightSky.appendChild(templateCopy);
@@ -94,9 +103,10 @@ function createNewStar(event) {
     addingClassAndSize(newStar);
     // With the .star class, we've already set an absolute position
     newStar.style.left = `${event.clientX}px`; // Where the user clicks
-    newStar.style.top = `${event.clientY}px`;    
-    nightSky.appendChild(newStar);
-    console.log(event.clientY);
+    newStar.style.top = `${event.clientY}px`;
+    // Adding animation
+    newStar.classList.add("star--blink");
+    nightSky.appendChild(newStar);    
 }
 
 /**

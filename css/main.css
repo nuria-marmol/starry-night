@@ -39,16 +39,16 @@ body {
     0% {
         opacity: 1;
     }
-    15% {
+    10% {
         opacity: .3;
     }
-    30% {
+    25% {
         opacity: 1;
     }
-    65% {
+    55% {
         opacity: .3;
     }
-    90% {
+    60% {
         opacity: 1;
     }
 }
