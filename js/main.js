@@ -87,7 +87,7 @@ function defaultStars() {
             if (!(index % 2 === 1)) {
                 templateCopy.classList.add("star--blink");
             }           
-        }, 2000);
+        }, 3000);
         templateCopy.style.left = `${randomXCoord(screenWidth)}px`;
         templateCopy.style.top = `${randomYCoord(screenHeight)}px`;
         nightSky.appendChild(templateCopy);

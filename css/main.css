@@ -45,7 +45,10 @@ body {
     25% {
         opacity: 1;
     }
-    55% {
+    35% {
+        opacity: 1;
+    }
+    45% {
         opacity: .3;
     }
     60% {
@@ -79,10 +82,15 @@ body {
 
 @media screen and (max-width: 480px) {
 
-    /* Centering button on smartphones */
+    /* Centering these elements on smartphones */
     .button {
         right: unset;
         left: 50%;
         transform: translateX(-50%);        
+    }
+
+    .message {
+        left: 1rem;
+        transform: unset;
     }
 }
