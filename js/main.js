@@ -19,17 +19,6 @@ function showMessage() {
 }
 
 /**
- * Random size for initial and future stars
- * 
- * @returns {number}
- */
-function getStarSize() {
-    const differentSizes = [1, 2, 3, 4];
-    const randomSize = differentSizes[Math.floor(Math.random() * differentSizes.length)];
-    return randomSize;
-}
-
-/**
  * Random X coordinate for initial stars
  * 
  * @param {number} max Highest X coordinate
@@ -52,6 +41,17 @@ function randomYCoord(max) {
 }
 
 /**
+ * Random size for initial and future stars
+ * 
+ * @returns {number}
+ */
+function getStarSize() {
+    const differentSizes = [1, 2, 3, 4];
+    const randomSize = differentSizes[Math.floor(Math.random() * differentSizes.length)];
+    return randomSize;
+}
+
+/**
  * Adding size and the defined class to stars
  * 
  * @param {HTMLElement} aDiv The star
@@ -62,6 +62,25 @@ function addingClassAndSize(aDiv) {
     aDiv.classList.add("star");    
     aDiv.style.width = `.${size}rem`;
     aDiv.style.height = `.${size}rem`;
+}
+
+/**
+ * Applying the animation that will be used for default stars
+ * 
+ * @param {number} index Position in array of stars
+ * @param {HTMLElement} template The div or star
+ */
+function defaultStarsAnimation(index, template) {
+    /* We don't want all stars blinking at the same time, so first we focus on odd elements. */
+    if (index % 2 === 1) {
+        template.classList.add("star--blink");
+    }
+    setTimeout(() => {
+        // Adding animation to even elements a bit later
+        if (!(index % 2 === 1)) {
+            template.classList.add("star--blink");
+        }           
+    }, 3000);
 }
 
 /**
@@ -76,18 +95,9 @@ function defaultStars() {
     initialStars.forEach(function (element, index) {
         // The div
         const templateCopy = template.cloneNode(true);
-        // Call to previous function
-        addingClassAndSize(templateCopy);
-        // Adding animation. We don't want all stars blinking at the same time
-        if (index % 2 === 1) { // odd elements
-            templateCopy.classList.add("star--blink");
-        }
-        setTimeout(() => {
-            // Adding animation to even elements a bit later
-            if (!(index % 2 === 1)) {
-                templateCopy.classList.add("star--blink");
-            }           
-        }, 3000);
+        // Call to previous functions
+        addingClassAndSize(templateCopy);        
+        defaultStarsAnimation(index, templateCopy);
         templateCopy.style.left = `${randomXCoord(screenWidth)}px`;
         templateCopy.style.top = `${randomYCoord(screenHeight)}px`;
         nightSky.appendChild(templateCopy);
@@ -120,13 +130,16 @@ function changeConstellations() {
     defaultStars();
 }
 
-function createShootingStar() {
-    const shootingStar = document.createElement("span");    
-    shootingStar.classList.add("shooting-star");
-    nightSky.appendChild(shootingStar);      
-    shootingStar.animate([
+/**
+ * Defining the animation for shooting stars
+ * 
+ * @param {HTMLElement} element The shooting star
+ */
+function shootingStarAnimation(element) {
+    element.animate([
         // First shooting star
         { top: "0", left: "13rem"},
+        // For a smoother opacity change
         { top: "19rem", left: "6rem", width: "3rem", opacity: 1 },
         { top: "34rem", left: "0", width: ".2rem", opacity: 0 },   
         // Second shooting star
@@ -143,6 +156,14 @@ function createShootingStar() {
         fill: "forwards",
         delay: 3000
     })
+}
+
+function createShootingStar() {
+    const shootingStar = document.createElement("span");    
+    shootingStar.classList.add("shooting-star");
+    nightSky.appendChild(shootingStar);
+    // Applying animation
+    shootingStarAnimation(shootingStar);
 }
 
 // Events
