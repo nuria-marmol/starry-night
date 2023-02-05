@@ -131,7 +131,7 @@ function changeConstellations() {
 }
 
 /**
- * Defining the animation for shooting stars
+ * Defining the animation for shooting stars. Concrete trajectories
  * 
  * @param {HTMLElement} element The shooting star
  */
@@ -148,8 +148,8 @@ function shootingStarAnimation(element) {
         { top: "19rem", left: "-7rem", width: "3rem", opacity: 1 },
         // Last one
         { top: "12rem", right: "0" },
-        { top: "21rem", right: "5rem", width: "5rem", opacity: 1 },
-        { top: "34rem", right: "13rem", width: ".2rem", opacity: 0 }        
+        { top: "21rem", right: "7rem", width: "4rem", opacity: 1 },
+        { top: "32rem", right: "16rem", width: ".2rem", opacity: 0 }        
     ], {
         duration: 8000,
         iterations: Infinity,
