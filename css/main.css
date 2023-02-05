@@ -81,7 +81,8 @@ body {
 }
 
 .shooting-star {    
-    position: absolute;    
+    position: absolute;
+    top: -7rem; 
     height: .1rem;
     width: 7rem;
     /* White and then a really transparent white */

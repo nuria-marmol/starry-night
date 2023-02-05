@@ -112,20 +112,23 @@ function createNewStar(event) {
 /**
  * Cleaning all previous stars and then generating new ones
  */
-function changeConstellations() {        
-    nightSky.textContent = "";
-    defaultStars();    
+function changeConstellations() {      
+    const currentStars = document.querySelectorAll(".star");
+    currentStars.forEach(function (element) {
+        element.remove();
+    })
+    defaultStars();
 }
 
 function createShootingStar() {
     const shootingStar = document.createElement("span");    
     shootingStar.classList.add("shooting-star");
-    nightSky.appendChild(shootingStar);    
+    nightSky.appendChild(shootingStar);      
     shootingStar.animate([
         // First shooting star
         { top: "0", left: "13rem"},
         { top: "19rem", left: "6rem", width: "3rem", opacity: 1 },
-        { top: "34rem", left: "0", width: ".2rem", opacity: 0 },      
+        { top: "34rem", left: "0", width: ".2rem", opacity: 0 },   
         // Second shooting star
         { top: "-7rem", left: "11rem", opacity: 0 },
         { top: "-2rem", left: "8rem", width: "7rem" },
@@ -137,7 +140,8 @@ function createShootingStar() {
     ], {
         duration: 8000,
         iterations: Infinity,
-        fill: "forwards"
+        fill: "forwards",
+        delay: 3000
     })
 }
 
