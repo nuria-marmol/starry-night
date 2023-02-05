@@ -73,7 +73,7 @@ function defaultStars() {
     const screenWidth = window.innerWidth - 25;
     const screenHeight = window.innerHeight - 62;
     const initialStars = Array(30).fill("");
-    initialStars.forEach(function(element, index) {
+    initialStars.forEach(function (element, index) {
         // The div
         const templateCopy = template.cloneNode(true);
         // Call to previous function
@@ -117,6 +117,30 @@ function changeConstellations() {
     defaultStars();    
 }
 
+function createShootingStar() {
+    const shootingStar = document.createElement("span");    
+    shootingStar.classList.add("shooting-star");
+    nightSky.appendChild(shootingStar);    
+    shootingStar.animate([
+        // First shooting star
+        { top: "0", left: "13rem"},
+        { top: "19rem", left: "6rem", width: "3rem", opacity: 1 },
+        { top: "34rem", left: "0", width: ".2rem", opacity: 0 },      
+        // Second shooting star
+        { top: "-7rem", left: "11rem", opacity: 0 },
+        { top: "-2rem", left: "8rem", width: "7rem" },
+        { top: "19rem", left: "-7rem", width: "3rem", opacity: 1 },
+        // Last one
+        { top: "12rem", right: "0" },
+        { top: "21rem", right: "5rem", width: "5rem", opacity: 1 },
+        { top: "34rem", right: "13rem", width: ".2rem", opacity: 0 }        
+    ], {
+        duration: 8000,
+        iterations: Infinity,
+        fill: "forwards"
+    })
+}
+
 // Events
 document.addEventListener("click", createNewStar);
 button.addEventListener("click", changeConstellations);
@@ -124,3 +148,4 @@ button.addEventListener("click", changeConstellations);
 // Init
 defaultStars();
 showMessage();
+createShootingStar();

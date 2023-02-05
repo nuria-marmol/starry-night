@@ -80,6 +80,15 @@ body {
     opacity: 1;
 }
 
+.shooting-star {    
+    position: absolute;    
+    height: .1rem;
+    width: 7rem;
+    /* White and then a really transparent white */
+    background-image: linear-gradient(90deg, var(--colour-white) 1%, rgba(255, 255, 255, .1));  
+    transform: rotate(-45deg);
+}
+
 @media screen and (max-width: 480px) {
 
     /* Centering these elements on smartphones */
