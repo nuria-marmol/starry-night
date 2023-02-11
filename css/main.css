@@ -152,7 +152,7 @@ body {
 
 .shooting-star--falling {
     animation-name: falling-star;
-    animation-duration: 12s;
+    animation-duration: 11s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
