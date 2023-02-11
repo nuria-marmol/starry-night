@@ -91,7 +91,7 @@ function defaultStars() {
     Minus a number (same min we used for getting random coords) for not making an overflow of stars */
     const screenWidth = window.innerWidth - 25;
     const screenHeight = window.innerHeight - 62;
-    const initialStars = Array(30).fill("");
+    const initialStars = Array(32).fill("");
     initialStars.forEach(function (element, index) {
         // The div
         const templateCopy = template.cloneNode(true);
@@ -130,40 +130,12 @@ function changeConstellations() {
     defaultStars();
 }
 
-/**
- * Defining the animation for shooting stars. Concrete trajectories
- * 
- * @param {HTMLElement} element The shooting star
- */
-function shootingStarAnimation(element) {
-    element.animate([
-        // First shooting star
-        { top: "0", left: "13rem"},
-        // For a smoother opacity change
-        { top: "19rem", left: "6rem", width: "3rem", opacity: 1 },
-        { top: "34rem", left: "0", width: ".2rem", opacity: 0 },   
-        // Second shooting star
-        { top: "-7rem", left: "11rem", opacity: 0 },
-        { top: "-2rem", left: "8rem", width: "7rem" },
-        { top: "19rem", left: "-7rem", width: "3rem", opacity: 1 },
-        // Last one
-        { top: "12rem", right: "0" },
-        { top: "21rem", right: "7rem", width: "4rem", opacity: 1 },
-        { top: "32rem", right: "16rem", width: ".2rem", opacity: 0 }        
-    ], {
-        duration: 8000,
-        iterations: Infinity,
-        fill: "forwards",
-        delay: 3000
-    })
-}
-
 function createShootingStar() {
     const shootingStar = document.createElement("span");    
     shootingStar.classList.add("shooting-star");
     nightSky.appendChild(shootingStar);
-    // Applying animation
-    shootingStarAnimation(shootingStar);
+    // Applying animation    
+    shootingStar.classList.add("shooting-star--falling");
 }
 
 // Events

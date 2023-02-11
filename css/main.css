@@ -88,6 +88,76 @@ body {
     /* White and then a really transparent white */
     background-image: linear-gradient(90deg, var(--colour-white) 1%, rgba(255, 255, 255, .1));  
     transform: rotate(-45deg);
+    opacity: 0;
+}
+
+@keyframes falling-star {
+    /* First shooting star */
+    0% {
+        top: 0;
+        left: 13rem;        
+        opacity: 0;
+    }
+    6% {
+        top: 19rem;
+        left: 6rem;
+        width: 3rem;
+        opacity: 1;
+    }
+    11% {
+        top: 34rem;
+        left: 0;
+        width: .2rem;
+        opacity: 0;
+    }
+    /* Second shooting star */
+    12% {
+        top: -7rem;
+        left: 11rem;
+        opacity: 0;
+    } 
+    17% {
+        top: -2rem;
+        left: 8rem;
+        width: 7rem;
+        opacity: 1;
+    }
+    26% {
+        top: 19rem;
+        left: -7rem;
+        width: 3rem;
+        opacity: 0;
+    }
+    /* Last one */
+    40% {
+        top: 12rem;
+        left: unset;
+        right: 0;
+        width: 7rem;
+        opacity: 0;       
+    }
+    44% {
+        top: 21rem;
+        right: 7rem;
+        width: 4rem;
+        opacity: 1;
+    }    
+    49% {
+        top: 32rem;
+        right: 16rem;
+        width: .2rem;
+        opacity: 0;
+    }    
+}
+
+.shooting-star--falling {
+    animation-name: falling-star;
+    animation-duration: 12s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    animation-delay: 4s;
+    
 }
 
 @media screen and (max-width: 480px) {
